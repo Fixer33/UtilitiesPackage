@@ -1,0 +1,18 @@
+{
+    "name": "com.fixer33.utilities.Editor",
+    "rootNamespace": "Utilities.Editor",
+    "references": [
+        "com.fixer33.utilities"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

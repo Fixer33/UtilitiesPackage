@@ -1,0 +1,12 @@
+{
+  "name": "com.fixer33.utilities",
+  "version": "1.0.0",
+  "displayName": "Utilities",
+  "description": "Package containing some QoL utilities",
+  "unity": "6000.0",
+  "author": {
+    "name": "Fixer33",
+    "email": "fsfixer33@gmail.com",
+    "url": "https://github.com/Fixer33"
+  }
+}
