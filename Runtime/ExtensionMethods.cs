@@ -14,6 +14,25 @@ namespace Utilities
                 action?.Invoke(item);
             }
         }
+
+        public static int IndexOf<T>(this IEnumerable<T> collection, T item)
+        {
+            if (item == null)
+                return -1;
+            
+            int counter = 0;
+            foreach (var i in collection)
+            {
+                if (item.Equals(i))
+                {
+                    return counter;
+                }
+
+                counter++;
+            }
+
+            return -1;
+        }
     }
 
     public static class ButtonExtensions
