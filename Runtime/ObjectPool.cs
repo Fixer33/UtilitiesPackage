@@ -77,11 +77,15 @@ namespace Utilities
 
         public void Clear()
         {
+            _pool.Clear();
+        }
+
+        public void ReleaseAll()
+        {
             List<T> buf = new();
             buf.AddRange(_activeItems);
             buf.ForEach(i => _pool.Release(i));
             _activeItems.Clear();
-            _pool.Clear();
         }
 
         public int CountInactive => _pool.CountInactive;
