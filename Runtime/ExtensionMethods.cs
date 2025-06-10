@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Utilities
 {
@@ -32,6 +33,27 @@ namespace Utilities
             }
 
             return -1;
+        }
+
+        public static T GetRandom<T>(this ICollection<T> collection)
+        {
+            if (collection == null)
+                throw new NullReferenceException();
+            
+            var itemCount = collection.Count;
+            if (itemCount <= 0)
+                return default;
+
+            int counter = 0;
+            int index = Random.Range(0, itemCount);
+            foreach (var item in collection)
+            {
+                if (counter == index)
+                    return item;
+                counter++;
+            }
+
+            return default;
         }
     }
 
