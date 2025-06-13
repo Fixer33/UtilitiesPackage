@@ -13,6 +13,8 @@ namespace Utilities
     public class ObjectPool<T> : IObjectPool<T>
         where T : class
     {
+        public IList<T> ActiveItems => _activeItems;
+
         private readonly UnityEngine.Pool.ObjectPool<T> _pool;
         private readonly IList<T> _activeItems;
         
