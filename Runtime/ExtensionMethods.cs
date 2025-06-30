@@ -35,6 +35,30 @@ namespace Utilities
             return -1;
         }
 
+        public static T GetRandom<T>(this IEnumerable<T> collection)
+        {
+            if (collection == null)
+                throw new NullReferenceException();
+
+            int counter = 0;
+            foreach (var item in collection)
+            {
+                counter++;
+            }
+
+            int index = Random.Range(0, counter);
+            foreach (var item in collection)
+            {
+                if (--counter == index)
+                    return item;
+            }
+
+            return default;
+        }
+    }
+    
+    public static class CollectionExtensions
+    {
         public static T GetRandom<T>(this ICollection<T> collection)
         {
             if (collection == null)
