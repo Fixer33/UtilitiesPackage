@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
@@ -10,9 +12,11 @@ namespace Utilities
     /// Wrapper for Unity default object pool
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ObjectPool<T> : IObjectPool<T>
+    public class ObjectPool<T> : IObjectPool<T>, IEnumerable<T>
         where T : class
     {
+        public IList<T> ActiveItems => _activeItems;
+
         private readonly UnityEngine.Pool.ObjectPool<T> _pool;
         private readonly IList<T> _activeItems;
         
@@ -89,6 +93,9 @@ namespace Utilities
         }
 
         public int CountInactive => _pool.CountInactive;
+
+        [MustDisposeResource] public IEnumerator<T> GetEnumerator() => _activeItems.GetEnumerator();
+        [MustDisposeResource] IEnumerator IEnumerable.GetEnumerator() => _activeItems.GetEnumerator();
     }
 
     public class TemplateObjectPool<T> : ObjectPool<T> where T : MonoBehaviour
