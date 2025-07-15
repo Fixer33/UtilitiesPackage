@@ -25,18 +25,18 @@ namespace Utilities.Editor
                 AssetDatabase.DeleteAsset(path);
             }
 
-            [MenuItem("Assets/Sub-assets/Set selected object as target asset")]
+            [MenuItem("Assets/Fixer33/Sub-assets/Set selected object as target asset")]
             private static void SetSelectedObjectAsTargetAsset()
             {
                 _targetObject = Selection.activeObject;
                 _targetSelectedTime = DateTime.Now;
             }
 
-            [MenuItem("Assets/Sub-assets/Set selected object as target asset", isValidateFunction: true)]
+            [MenuItem("Assets/Fixer33/Sub-assets/Set selected object as target asset", isValidateFunction: true)]
             private static bool SetSelectedObjectAsTargetAssetIsValid() =>
                 Selection.activeObject && Selection.objects is not { Length: > 1 } && Selection.activeObject is not DefaultAsset;
             
-            [MenuItem("Assets/Sub-assets/Add selected assets to target asset")]
+            [MenuItem("Assets/Fixer33/Sub-assets/Add selected assets to target asset")]
             private static void AddSelectedAssetsToTarget()
             {
                 foreach (var asset in Selection.objects)
@@ -48,14 +48,14 @@ namespace Utilities.Editor
                 AssetDatabase.Refresh();
             }
 
-            [MenuItem("Assets/Sub-assets/Add selected assets to target asset", isValidateFunction: true)]
+            [MenuItem("Assets/Fixer33/Sub-assets/Add selected assets to target asset", isValidateFunction: true)]
             private static bool AddSelectedAssetsToTargetIsValid() =>
                 _targetObject != null &&
                 (DateTime.Now - _targetSelectedTime).TotalSeconds < MaxSecondsToPickSubAssets &&
                 Selection.objects is { Length: > 0 } &&
                 Selection.objects[0] is not DefaultAsset;
             
-            [MenuItem("Assets/Sub-assets/Add selected assets to asset by file dialog")]
+            [MenuItem("Assets/Fixer33/Sub-assets/Add selected assets to asset by file dialog")]
             private static void AddSelectedAssetsToTargetByDialog()
             {
                 string mainAssetPath = EditorUtility.OpenFilePanel("Select Main Asset", "Assets", "");
@@ -82,11 +82,11 @@ namespace Utilities.Editor
                 AssetDatabase.Refresh();
             }
             
-            [MenuItem("Assets/Sub-assets/Add selected assets to asset by file dialog", isValidateFunction: true)]
+            [MenuItem("Assets/Fixer33/Sub-assets/Add selected assets to asset by file dialog", isValidateFunction: true)]
             private static bool AddSelectedAssetsToTargetByDialogIsValid() => 
                 Selection.objects is { Length: > 0 } && Selection.objects[0] is not DefaultAsset;
             
-            [MenuItem("Assets/Sub-assets/Extract Assets")]
+            [MenuItem("Assets/Fixer33/Sub-assets/Extract Assets")]
             private static void RemoveSelectedSubAsset()
             {
                 var selectedObjects = Selection.objects;
@@ -110,7 +110,7 @@ namespace Utilities.Editor
                 Debug.Log("Sub-assets extracted successfully.");
             }
 
-            [MenuItem("Assets/Sub-assets/Extract Assets", isValidateFunction: true)]
+            [MenuItem("Assets/Fixer33/Sub-assets/Extract Assets", isValidateFunction: true)]
             private static bool RemoveSelectedSubAssetIsValid()
             {
                 var selectedObjects = Selection.objects;
@@ -128,7 +128,7 @@ namespace Utilities.Editor
         
         public static class FBXExport
         {
-            [MenuItem("Assets/Extract Animations/Export")]
+            [MenuItem("Assets/Fixer33/Extract Animations/Export")]
             public static void AnimationClipsExport()
             {
                 Object[] selectionAsset = Selection.GetFiltered(typeof(Object), SelectionMode.Unfiltered);
@@ -170,7 +170,7 @@ namespace Utilities.Editor
             }
             
             
-            [MenuItem("Assets/Extract Animations/Export", isValidateFunction: true)]
+            [MenuItem("Assets/Fixer33/Extract Animations/Export", isValidateFunction: true)]
             public static bool AnimationClipsExportIsValid()
             {
                 return Selection.objects is { Length: > 0 } && Selection.objects[0] is not DefaultAsset;
