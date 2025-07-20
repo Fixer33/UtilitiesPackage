@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Utilities
@@ -78,6 +80,19 @@ namespace Utilities
             }
 
             return default;
+        }
+
+        public static void ClearWithGameObjectDestroy<T>(this ICollection<T> collection)
+            where T : Component
+        {
+            collection.ForEach(i => Object.Destroy(i.gameObject));
+            collection.Clear();
+        }
+        
+        public static void ClearWithGameObjectDestroy(this ICollection<GameObject> collection)
+        {
+            collection.ForEach(Object.Destroy);
+            collection.Clear();
         }
     }
 
