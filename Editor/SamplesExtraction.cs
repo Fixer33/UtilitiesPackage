@@ -69,7 +69,7 @@ namespace Utilities.Editor
 
             string path = AssetDatabase.GetAssetPath(folderAsset);
             
-            return Regex.Match(path, @"Assets/Samples/[\w\d]+$").Success;
+            return Regex.Match(path, @"Assets/Samples/.+/[\d\.]+/[\w\d ]+$").Success;
         }
     }
 }
