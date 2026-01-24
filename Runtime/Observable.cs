@@ -12,6 +12,9 @@ namespace Utilities
             get => _value;
             set
             {
+                if (Equals(_value, value))
+                    return;
+                
                 var oldVal = _value;
                 _value = value;
                 ValueChanged?.Invoke(oldVal, _value);
