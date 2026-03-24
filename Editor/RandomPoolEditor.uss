@@ -1,0 +1,47 @@
+.cg-randompool__total {
+    unity-font-style: bold;
+    margin-left: 8px;
+}
+
+.cg-randompool__total--ok {
+    color: #2ecc71; /* green */
+}
+
+.cg-randompool__total--warn {
+    color: #e67e22; /* orange */
+}
+
+.cg-randompool__help {
+    margin-top: 6px;
+}
+
+.cg-randompool__row {
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 4px 2px;
+    gap: 8px;
+}
+
+.cg-randompool__row-left,
+.cg-randompool__row-right {
+    flex-grow: 1;
+}
+
+.cg-randompool__remove {
+    align-self: flex-end;
+}
+
+/* Weight control layout */
+.cg-randompool__weight {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+
+.cg-randompool__weight-slider {
+    flex-grow: 1;
+}
+
+.cg-randompool__weight-number {
+    width: 72px; /* compact numeric field for precise entry */
+}
