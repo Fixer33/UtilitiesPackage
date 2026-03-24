@@ -98,7 +98,7 @@ namespace Utilities
         [MustDisposeResource] IEnumerator IEnumerable.GetEnumerator() => _activeItems.GetEnumerator();
     }
 
-    public class TemplateObjectPool<T> : ObjectPool<T> where T : MonoBehaviour
+    public class TemplateObjectPool<T> : ObjectPool<T> where T : Component
     {
         private readonly bool _setAsLastSiblingOnGet;
         
@@ -125,6 +125,38 @@ namespace Utilities
         }
 
         private static T CreateFromTemplate(T template)
+        {
+            return Object.Instantiate(template, template.transform.parent);
+        }
+    }
+    
+    public class TemplateGameObjectObjectPool : ObjectPool<GameObject>
+    {
+        private readonly bool _setAsLastSiblingOnGet;
+        
+        public TemplateGameObjectObjectPool(GameObject template, bool setAsLastSiblingOnGet = true,
+            Action<GameObject> actionOnGet = null, Action<GameObject> actionOnRelease = null, 
+            Action<GameObject> actionOnDestroy = null, 
+            bool collectionCheck = true, int defaultCapacity = 10, int maxSize = 10000) : 
+            base(() => CreateFromTemplate(template), actionOnGet, actionOnRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize)
+        {
+            _setAsLastSiblingOnGet = setAsLastSiblingOnGet;
+            template.gameObject.SetActive(false);
+        }
+
+        protected override void OnItemGet(GameObject item)
+        {
+            item.gameObject.SetActive(true);
+            if (_setAsLastSiblingOnGet)
+                item.transform.SetAsLastSibling();
+        }
+
+        protected override void OnItemRelease(GameObject item)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        private static GameObject CreateFromTemplate(GameObject template)
         {
             return Object.Instantiate(template, template.transform.parent);
         }
