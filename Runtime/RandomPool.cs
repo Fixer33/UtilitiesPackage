@@ -14,23 +14,35 @@ namespace Utilities
 
     /// <summary>
     /// A serializable weighted random pool ScriptableObject that can hold any Unity-inspector-serializable type.
-    /// Weights are treated as percentage points and the editor/runtime can normalize them to sum to 100.
+    /// Weights are treated as percentage points and the system can normalize them to sum to 100.
     /// </summary>
     /// <typeparam name="T">Any type serializable by Unity (primitive, struct with [Serializable], UnityEngine.Object, etc.).</typeparam>
     public abstract class RandomPool<T> : RandomPoolBase
     {
+        /// <summary>
+        /// Represents an entry in the random pool.
+        /// </summary>
         [Serializable]
         public struct Entry
         {
+            /// <summary>
+            /// The item to be picked.
+            /// </summary>
             public T item;
+            
+            /// <summary>
+            /// The weight of this item in percentage points.
+            /// </summary>
             [Min(0f)] public float weight; // percentage points; the set is normalized to sum 100
         }
 
-        [SerializeField] private bool autoNormalize = true;
+        [SerializeField, Tooltip("If true, weights will be automatically normalized to sum to 100 on change.")] 
+        private bool autoNormalize = true;
+        
         [SerializeField] private List<Entry> entries = new List<Entry>();
 
         /// <summary>
-        /// Read-only view of entries.
+        /// Read-only view of pool entries.
         /// </summary>
         public IReadOnlyList<Entry> Entries => entries;
 
